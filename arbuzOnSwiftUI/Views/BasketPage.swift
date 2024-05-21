@@ -27,20 +27,30 @@ struct BasketPage: View {
         ProductForBasket(image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Grapefruits_-_whole-halved-segments.jpg/550px-Grapefruits_-_whole-halved-segments.jpg", name: "GrapeFruit", price: "1000 тг", addedCount: 5),
         ProductForBasket(image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Oranges_-_whole-halved-segment.jpg/600px-Oranges_-_whole-halved-segment.jpg", name: "Orange", price: "700 тг", addedCount: 7)]
     
+    @State var isLinkActive = false
+    
     var body: some View {
+
         NavigationView {
-            VStack{
-                ProductCollectionView(basket: productB)
-                Button("sum = ") {
-                    
-                    NavigationLink(destination: HelloWorldView()) {
-                        Text("Hello")
-                    }
-                    
-                }
-            }
-            
-        }
+                   VStack {
+                       ProductCollectionView(basket: productB)
+                       
+                           Button {
+                               self.isLinkActive = true
+                               print("tapped")
+                           } label: {
+                               Text("Checkout")
+                                   .foregroundStyle(.white)
+                                   .bold()
+                           }
+                           .frame(width: 300, height: 56)
+                           .background(Color.green)
+                           .cornerRadius(24)
+                          
+                       NavigationLink("", destination:  HelloWorldView(), isActive: $isLinkActive)
+                           
+                   }
+               }
             
     }
 }
